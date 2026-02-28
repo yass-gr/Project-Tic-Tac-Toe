@@ -390,7 +390,7 @@ main {
   position: absolute;
   z-index: 1005;
   background-color: var(--boardColor);
-  animation: showWinningAnim 1.7s ease-in-out;
+  animation: showWinningAnim 1.5s ease-in-out;
   top: 50px;
   display: none;
 }
@@ -434,7 +434,7 @@ main {
   position: absolute;
   z-index: 1005;
   background-color: var(--boardColor);
-  animation: showWinningAnim 1.7s ease-in-out;
+  animation: showWinningAnim 1.5s ease-in-out;
   top: 50px;
   display: none;
 }
@@ -464,7 +464,7 @@ main {
   position: absolute;
   z-index: 1005;
   background-color: var(--boardColor);
-  animation: showWinningAnim 1.7s ease-in-out;
+  animation: showWinningAnim 1.5s ease-in-out;
   top: 50px;
   display: none;
 }

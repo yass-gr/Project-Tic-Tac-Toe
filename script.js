@@ -296,7 +296,9 @@ const displayManager = (function () {
         if (gameOver) {
           addCellsEventsListeners();
           updateScoreDisplay();
-          addAnimatedBar();
+          if (gameController.getGameOverType() === "win") {
+            addAnimatedBar();
+          }
           gameOverScreen();
         }
       }
