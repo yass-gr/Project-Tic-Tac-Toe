@@ -1,0 +1,512 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Google Sans", sans-serif;
+  user-select: none;
+}
+
+:root {
+  --bg: #1f1f1f;
+  --boardColor: #f229e5;
+  --boardGrid: #bf27b5;
+  --playerBorder: #434645;
+  --X: #f27127;
+  --O: #dcf235;
+}
+
+body {
+  height: 100vh;
+  background-color: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/*board*/
+.boardContainer {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--boardColor);
+  overflow: hidden;
+  position: relative;
+}
+.board {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+}
+.animB {
+  animation: BoardGridAnimation 1s ease-in-out;
+}
+
+.board::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(
+    to left,
+    transparent 32%,
+    var(--boardGrid) 32%,
+    var(--boardGrid) 34%,
+    transparent 34%,
+    transparent 66%,
+    var(--boardGrid) 66%,
+    var(--boardGrid) 68%,
+    transparent 68%,
+    transparent 100%
+  );
+  width: 300px;
+  height: 300px;
+}
+.board::before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(
+    to bottom,
+    transparent 32%,
+    var(--boardGrid) 32%,
+    var(--boardGrid) 34%,
+    transparent 34%,
+    transparent 66%,
+    var(--boardGrid) 66%,
+    var(--boardGrid) 68%,
+    transparent 68%,
+    transparent 100%
+  );
+  width: 300px;
+  height: 300px;
+}
+
+@keyframes BoardGridAnimation {
+  from {
+    box-shadow: inset 0 0 0 200px var(--boardColor);
+  }
+  to {
+    box-shadow: inset 0 0 0 0px var(--boardColor);
+  }
+}
+
+/*player info*/
+
+.player {
+  border: 1px solid var(--playerBorder);
+  border-bottom: 4px solid transparent;
+  width: 180px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  color: white;
+  transition: border 0.2s ease-in-out;
+}
+.playersInfo2 {
+  display: flex;
+  width: 400px;
+  justify-content: space-around;
+  position: relative;
+}
+
+.player1current {
+  border-bottom: 4px solid var(--X);
+}
+.player2current {
+  border-bottom: 4px solid var(--O);
+}
+
+.playerName span {
+  color: rgba(255, 255, 255, 0.375);
+  position: absolute;
+  top: 16px;
+  left: 167px;
+  pointer-events: none;
+}
+.playerName input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding-block: 7px;
+  border-radius: 5px;
+  border: 1px solid var(--playerBorder);
+  padding-left: 5px;
+  outline: none;
+  border: 2px solid transparent;
+}
+.playerName {
+  width: 200px;
+  justify-content: space-between;
+  padding: 10px;
+  color: white;
+  position: relative;
+}
+.playerInfo1 {
+  display: flex;
+  width: 400px;
+  justify-content: space-around;
+}
+
+#player1Name:focus {
+  border: 2px solid var(--X);
+}
+#player2Name:focus {
+  border: 2px solid var(--O);
+}
+
+.info {
+  padding: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.656);
+  font-size: 1rem;
+}
+
+/*reset btn*/
+.actions {
+  width: 400px;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+#reset {
+  background: transparent;
+  border: none;
+  color: var(--boardColor);
+  font-size: larger;
+  font-weight: bold;
+  padding-block: 5px;
+  padding-inline: 30px;
+  border-radius: 15px;
+  transition: all 0.05s ease-in-out;
+  cursor: pointer;
+}
+
+#reset:hover {
+  color: var(--bg);
+  background-color: var(--boardColor);
+}
+#reset:active {
+  transform: scale(0.9);
+}
+
+/*-----*/
+main {
+  border: 1px solid var(--playerBorder);
+  border-radius: 10px;
+  padding-block: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.546);
+}
+
+/*board cells positioning*/
+.boardReal {
+  width: 300px;
+  height: 300px;
+
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100);
+  position: relative;
+  z-index: 1000;
+}
+.cell {
+  font-size: 5rem;
+  font-weight: bold;
+  text-align: center;
+  align-content: center;
+  z-index: 1000;
+  cursor: pointer;
+  pointer-events: all;
+  width: 100px;
+  height: 100px;
+  user-select: none;
+}
+
+.xCell {
+  background: linear-gradient(
+    to bottom,
+    var(--X) 50%,
+    var(--boardColor) 50%,
+    var(--boardColor) 100%
+  );
+  background-size: 200px 200px;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: X 0.5s ease-in-out forwards;
+}
+@keyframes X {
+  0% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.oCell {
+  background: linear-gradient(
+    60deg,
+    var(--O) 50%,
+    var(--boardColor) 50%,
+    var(--boardColor) 100%
+  );
+  background-size: 200px;
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+  animation: O 0.5s ease-in-out;
+}
+
+@keyframes O {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+
+.infoAnim {
+  animation: fade 0.5s ease-in-out;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animBars {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  z-index: 1003;
+  pointer-events: none;
+}
+
+.bar1 {
+  width: 90%;
+  height: 10px;
+  position: absolute;
+  top: 45px;
+  left: 15px;
+  display: none;
+}
+.fill {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  animation: barAnimation 1s ease-in-out;
+}
+
+.bar2 {
+  width: 90%;
+  height: 10px;
+  position: absolute;
+  top: 145px;
+  left: 15px;
+  display: none;
+}
+
+.bar3 {
+  width: 90%;
+  height: 10px;
+  position: absolute;
+  top: 245px;
+  left: 15px;
+  display: none;
+}
+
+.bar4 {
+  width: 90%;
+  height: 10px;
+  position: absolute;
+  top: 145px;
+  left: -85px;
+  transform: rotate(90deg);
+  display: none;
+}
+.bar5 {
+  width: 90%;
+  height: 10px;
+  position: absolute;
+  top: 145px;
+  left: 16px;
+  transform: rotate(90deg);
+  display: none;
+}
+.bar6 {
+  width: 90%;
+  height: 10px;
+  position: absolute;
+  top: 145px;
+  left: 113px;
+  transform: rotate(90deg);
+  display: none;
+}
+
+.bar7 {
+  width: 120%;
+  height: 10px;
+  position: absolute;
+  top: 150px;
+  left: -25px;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.bar8 {
+  width: 120%;
+  height: 10px;
+  position: absolute;
+  top: 140px;
+  left: -25px;
+  transform: rotate(135deg);
+  display: none;
+}
+
+@keyframes barAnimation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.showBar {
+  display: block !important;
+}
+
+.winingAnimO {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  z-index: 1005;
+  background-color: var(--boardColor);
+  animation: showWinningAnim 1.7s ease-in-out;
+  top: 50px;
+  display: none;
+}
+
+.winingAnimO span {
+  color: var(--O);
+  font-size: 15rem;
+  font-weight: bold;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.winingAnimO p {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+}
+
+@keyframes showWinningAnim {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+    top: 80px;
+  }
+  100% {
+    opacity: 1;
+    top: 50px;
+  }
+}
+
+.winingAnimX {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  z-index: 1005;
+  background-color: var(--boardColor);
+  animation: showWinningAnim 1.7s ease-in-out;
+  top: 50px;
+  display: none;
+}
+
+.winingAnimX span {
+  color: var(--X);
+  font-size: 15rem;
+  font-weight: bold;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.winingAnimX p {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+}
+
+.winingAnimDraw {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  z-index: 1005;
+  background-color: var(--boardColor);
+  animation: showWinningAnim 1.7s ease-in-out;
+  top: 50px;
+  display: none;
+}
+
+.winingAnimDraw #drawX {
+  color: var(--X);
+  font-size: 10rem;
+  font-weight: bold;
+  position: absolute;
+  top: 30px;
+  left: 25%;
+  transform: translateX(-50%);
+}
+.winingAnimDraw #drawO {
+  color: var(--O);
+  font-size: 10rem;
+  font-weight: bold;
+  position: absolute;
+  top: 30px;
+  left: 73%;
+  transform: translateX(-50%);
+}
+.winingAnimDraw p {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+}
+
+.show {
+  display: block;
+}
+
+#resetScoreBtn {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 61px;
+  opacity: 0.3;
+  cursor: pointer;
+}

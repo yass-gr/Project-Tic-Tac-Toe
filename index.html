@@ -5,7 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+    />
   </head>
-  <body></body>
+  <body>
+    <main>
+      <div class="playerInfo1">
+        <div class="player1Name playerName">
+          <input type="text" name="" id="player1Name" value="Player 1" />
+          <span class="mdi mdi-pencil"></span>
+        </div>
+        <div class="player2Name playerName">
+          <input type="text" name="" id="player2Name" value="Player 2" />
+          <span class="mdi mdi-pencil"></span>
+        </div>
+      </div>
+      <div class="playersInfo2">
+        <div class="player1 player">
+          <span>X</span>
+          <p id="xScore">-</p>
+        </div>
+        <div class="resetScore">
+          <button title="Reset" id="resetScoreBtn">
+            <img src="restart.svg" alt="" />
+          </button>
+        </div>
+        <div class="player2 player">
+          <span>O</span>
+          <p id="oScore">-</p>
+        </div>
+      </div>
+      <div class="info">Start game by clicking on the Board</div>
+      <div class="boardContainer">
+        <div class="board"></div>
+        <div class="boardReal"></div>
+        <div class="animBars">
+          <div class="bar1" data-winning-combo="0">
+            <div class="fill"></div>
+          </div>
+          <div class="bar2" data-winning-combo="1">
+            <div class="fill"></div>
+          </div>
+          <div class="bar3" data-winning-combo="2">
+            <div class="fill"></div>
+          </div>
+
+          <div class="bar4" data-winning-combo="3">
+            <div class="fill"></div>
+          </div>
+          <div class="bar5" data-winning-combo="4">
+            <div class="fill"></div>
+          </div>
+          <div class="bar6" data-winning-combo="5">
+            <div class="fill"></div>
+          </div>
+
+          <div class="bar7" data-winning-combo="6">
+            <div class="fill"></div>
+          </div>
+          <div class="bar8" data-winning-combo="7">
+            <div class="fill"></div>
+          </div>
+        </div>
+        <div class="winingAnimO">
+          <span>O</span>
+          <p>WINNER!</p>
+        </div>
+        <div class="winingAnimX">
+          <span>X</span>
+          <p>WINNER!</p>
+        </div>
+        <div class="winingAnimDraw">
+          <span id="drawX">X</span><span id="drawO">O</span>
+          <p>DRAW</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="reset">New game</button>
+      </div>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
 </html>
